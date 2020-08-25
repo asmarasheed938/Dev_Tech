@@ -1,30 +1,78 @@
-import React, {Component, useState} from "react";
-import TodoList from './Components/TodoList'
+import React, {Component} from "react";
 
-const App =()=> {
-        const [inputList, setInputList] = useState("");
-        const [Items,setItems]=useState([]);
-        const itemEvent = (event) => {
-            setInputList(event.target.value);
-        };
-        const listOfItems=()=>{
-            setItems((oldItems)=>{
-                return [...oldItems,inputList];
-            })
-            setInputList("")};
-        const deleteItems=(id)=>{
-            setItems((oldItems)=>{
-                return oldItems.filter((arrElem,index)=>{
-                    return index!== id;
-                })})};
+
+class App extends Component {
+    constructor() {
+        super();
+        this.state = {
+            data:
+                [
+                    {
+                        "id": 7,
+                        "email": "michael.lawson@reqres.in",
+                        "first_name": "Michael",
+                        "last_name": "Lawson",
+                        "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/follettkyle/128.jpg"
+                    },
+                    {
+                        "id": 8,
+                        "email": "lindsay.ferguson@reqres.in",
+                        "first_name": "Lindsay",
+                        "last_name": "Ferguson",
+                        "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/araa3185/128.jpg"
+                    },
+                    {
+                        "id": 9,
+                        "email": "tobias.funke@reqres.in",
+                        "first_name": "Tobias",
+                        "last_name": "Funke",
+                        "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/vivekprvr/128.jpg"
+                    },
+                    {
+                        "id": 10,
+                        "email": "byron.fields@reqres.in",
+                        "first_name": "Byron",
+                        "last_name": "Fields",
+                        "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/russoedu/128.jpg"
+                    },
+                    {
+                        "id": 11,
+                        "email": "george.edwards@reqres.in",
+                        "first_name": "George",
+                        "last_name": "Edwards",
+                        "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/mrmoiree/128.jpg"
+                    },
+                    {
+                        "id": 12,
+                        "email": "rachel.howell@reqres.in",
+                        "first_name": "Rachel",
+                        "last_name": "Howell",
+                        "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/hebertialmeida/128.jpg"
+                    }
+                ]
+        }
+    }
+    render() {
         return (
-            <div className="main_div">
-                <div className="center_div">
-                    <br/><h1>ToDo List</h1><br/>
-                    <input type="text" placeholder="Add an Item" value={inputList} onChange={itemEvent}/>
-                    <button onClick={listOfItems}>+</button>
-                    <ol>
-                        {Items.map( (itemval,index) => {
-                        return <TodoList key={index} id={index} text={itemval} onSelect={deleteItems }  />;
-                    })}</ol></div></div>);}
+            <div>
+                <div className="main_div">
+                    <div className="center_div">
+                        <br/>
+                        <h1>List of Contacts</h1>
+                        <br/>
+                        <ul>
+                            {this.state.data.map(item => (
+                                <li key={item.id}>
+                                    <div>{item.first_name}</div>
+                                    <div>{item.last_name}</div>
+                                    <br/>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
 export default App;
